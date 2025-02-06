@@ -7,108 +7,110 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            background: url('https://source.unsplash.com/1600x900/?morocco,story') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             direction: rtl;
+            color: #fff;
         }
         .header {
-            background-color: #d32f2f;
+            background-color: rgba(211, 47, 47, 0.9);
             color: white;
             padding: 20px;
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: bold;
         }
         .container {
             max-width: 900px;
-            margin: 20px auto;
-            background: white;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            color: #333;
         }
         .story {
-            background: #fff3e0;
+            background: #ffebee;
             padding: 15px;
             margin: 15px 0;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .story h2 {
-            color: #d32f2f;
+            color: #b71c1c;
             margin-bottom: 10px;
         }
         .story p {
             font-size: 18px;
             line-height: 1.8;
-            color: #333;
+            color: #444;
         }
         .footer {
             text-align: center;
             padding: 15px;
-            background: #d32f2f;
+            background: rgba(211, 47, 47, 0.9);
             color: white;
             margin-top: 20px;
-        }
-        .add-story {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .add-story input, .add-story textarea, .add-story button {
-            padding: 10px;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
         }
-        .add-story button {
-            background: #d32f2f;
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+        }
+        .admin-panel input, .admin-panel textarea, .admin-panel button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .admin-button {
+            background: #b71c1c;
             color: white;
+            padding: 10px;
             border: none;
             cursor: pointer;
-        }
-        .add-story button:hover {
-            background: #b71c1c;
         }
     </style>
 </head>
 <body>
-    <div class="header">موقع el Mehdi Fareh للقصص</div>
+    <div class="header">موقع el Mehdi Fareh - قصص مغربية</div>
     <div class="container">
         <h2>مرحبًا في عالم القصص</h2>
-        <p>استمتع بقراءة القصص أو أضف قصتك الخاصة!</p>
+        <p>استمتع بقراءة القصص المنشورة!</p>
         
-        <div class="story">
-            <h2>القصة الأولى</h2>
-            <p>هذه قصة تجريبية يمكن استبدالها بقصص أخرى...</p>
-        </div>
-        <div class="story">
-            <h2>القصة الثانية</h2>
-            <p>يمكنك إضافة المزيد من القصص بسهولة...</p>
+        <div id="stories-container">
+            <!-- سيتم إضافة القصص هنا -->
         </div>
         
-        <div class="add-story">
-            <h3>أضف قصتك</h3>
-            <input type="text" id="story-title" placeholder="عنوان القصة">
-            <textarea id="story-content" placeholder="اكتب قصتك هنا..."></textarea>
-            <button onclick="addStory()">إضافة القصة</button>
+        <button class="admin-button" onclick="toggleAdminPanel()">تسجيل الدخول كأدمن</button>
+        <div class="admin-panel" id="admin-panel">
+            <h3>إضافة قصة جديدة</h3>
+            <input type="text" id="admin-story-title" placeholder="عنوان القصة">
+            <textarea id="admin-story-content" placeholder="اكتب القصة هنا..."></textarea>
+            <button onclick="publishStory()">نشر القصة</button>
         </div>
     </div>
     
     <div class="footer">جميع الحقوق محفوظة &copy; el Mehdi Fareh</div>
     
     <script>
-        function addStory() {
-            let title = document.getElementById('story-title').value;
-            let content = document.getElementById('story-content').value;
+        function toggleAdminPanel() {
+            let panel = document.getElementById('admin-panel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function publishStory() {
+            let title = document.getElementById('admin-story-title').value;
+            let content = document.getElementById('admin-story-content').value;
             if (title && content) {
                 let storyContainer = document.createElement('div');
                 storyContainer.classList.add('story');
                 storyContainer.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
-                document.querySelector('.container').appendChild(storyContainer);
-                document.getElementById('story-title').value = '';
-                document.getElementById('story-content').value = '';
+                document.getElementById('stories-container').appendChild(storyContainer);
+                document.getElementById('admin-story-title').value = '';
+                document.getElementById('admin-story-content').value = '';
             } else {
                 alert('يرجى إدخال عنوان القصة ومحتواها!');
             }
