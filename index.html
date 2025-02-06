@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع el Mehdi Fareh للقصص</title>
+    <title>موقع el Mehdi Fareh للتواصل</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('https://source.unsplash.com/1600x900/?morocco,story') no-repeat center center fixed;
+            background: url('https://source.unsplash.com/1600x900/?morocco,chat') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -32,21 +32,20 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             color: #333;
         }
-        .story {
+        .chat-box {
             background: #ffebee;
             padding: 15px;
             margin: 15px 0;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 300px;
+            overflow-y: scroll;
         }
-        .story h2 {
-            color: #b71c1c;
-            margin-bottom: 10px;
-        }
-        .story p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #444;
+        .message {
+            background: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
         }
         .footer {
             text-align: center;
@@ -59,72 +58,27 @@
     </style>
 </head>
 <body>
-    <div class="header">موقع el Mehdi Fareh - قصص مغربية</div>
+    <div class="header">موقع el Mehdi Fareh - دردشة وتواصل</div>
     <div class="container">
-        <h2>مرحبًا في عالم القصص</h2>
-        <p>استمتع بقراءة القصص المنشورة!</p>
-        
-        <div id="stories-container">
-            <!-- سيتم إضافة القصص هنا -->
+        <h2>مرحبا بك في غرفة الدردشة</h2>
+        <div class="chat-box" id="chat-box">
+            <!-- سيتم إضافة الرسائل هنا -->
         </div>
+        <input type="text" id="message" placeholder="اكتب رسالتك هنا...">
+        <button onclick="sendMessage()">إرسال</button>
     </div>
-    
     <div class="footer">جميع الحقوق محفوظة &copy; el Mehdi Fareh</div>
-</body>
-</html>
-
-<!-- صفحة تسجيل الدخول للأدمن -->
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل دخول الأدمن</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: black;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        .login-container {
-            max-width: 400px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        input, button {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-        button {
-            background: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h2>تسجيل دخول الأدمن</h2>
-        <input type="text" id="username" placeholder="اسم المستخدم">
-        <input type="password" id="password" placeholder="كلمة المرور">
-        <button onclick="login()">تسجيل الدخول</button>
-    </div>
     <script>
-        function login() {
-            let user = document.getElementById('username').value;
-            let pass = document.getElementById('password').value;
-            if (user === "admin" && pass === "1234") {
-                window.location.href = "admin.html";
-            } else {
-                alert("بيانات تسجيل الدخول غير صحيحة!");
+        function sendMessage() {
+            let message = document.getElementById('message').value;
+            let chatBox = document.getElementById('chat-box');
+            if (message.trim() !== "") {
+                let newMessage = document.createElement('div');
+                newMessage.className = 'message';
+                newMessage.innerText = message;
+                chatBox.appendChild(newMessage);
+                document.getElementById('message').value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
     </script>
