@@ -60,6 +60,12 @@
 <body>
     <div class="header">موقع el Mehdi Fareh - دردشة وتواصل</div>
     <div class="container">
+        <h2>إنشاء حساب</h2>
+        <input type="text" id="fullName" placeholder="الاسم الكامل">
+        <input type="date" id="birthDate" placeholder="تاريخ الميلاد">
+        <input type="text" id="username" placeholder="اسم المستخدم">
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button onclick="registerUser()">تسجيل</button>
         <h2>مرحبا بك في غرفة الدردشة</h2>
         <div class="chat-box" id="chat-box">
             <!-- سيتم إضافة الرسائل هنا -->
@@ -69,6 +75,20 @@
     </div>
     <div class="footer">جميع الحقوق محفوظة &copy; el Mehdi Fareh</div>
     <script>
+        function registerUser() {
+            let fullName = document.getElementById('fullName').value;
+            let birthDate = document.getElementById('birthDate').value;
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            
+            if (fullName && birthDate && username && password) {
+                localStorage.setItem("user", JSON.stringify({ fullName, birthDate, username, password }));
+                alert("تم إنشاء الحساب بنجاح!");
+            } else {
+                alert("يرجى ملء جميع الحقول!");
+            }
+        }
+        
         function sendMessage() {
             let message = document.getElementById('message').value;
             let chatBox = document.getElementById('chat-box');
