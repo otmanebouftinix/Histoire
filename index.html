@@ -3,45 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع سرد القصص</title>
+    <title>موقع el Mehdi Fareh للقصص</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f8f8f8;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        .header {
+            background-color: #d32f2f;
+            color: white;
             padding: 20px;
+            text-align: center;
+            font-size: 24px;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
+            max-width: 900px;
+            margin: 20px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #d32f2f;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
         .story {
-            background: #eee;
+            background: #fff3e0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .story h2 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+        }
+        .story p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #d32f2f;
+            color: white;
+            margin-top: 20px;
+        }
+        .add-story {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .add-story input, .add-story textarea, .add-story button {
             padding: 10px;
-            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
             border-radius: 5px;
+        }
+        .add-story button {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-story button:hover {
+            background: #b71c1c;
         }
     </style>
 </head>
 <body>
+    <div class="header">موقع el Mehdi Fareh للقصص</div>
     <div class="container">
-        <h1>مرحبًا في موقع سرد القصص</h1>
+        <h2>مرحبًا في عالم القصص</h2>
         <p>استمتع بقراءة القصص أو أضف قصتك الخاصة!</p>
+        
         <div class="story">
-            <h2>عنوان القصة 1</h2>
-            <p>هذه قصة قصيرة توضح كيف يمكنك إضافة القصص هنا...</p>
+            <h2>القصة الأولى</h2>
+            <p>هذه قصة تجريبية يمكن استبدالها بقصص أخرى...</p>
         </div>
         <div class="story">
-            <h2>عنوان القصة 2</h2>
-            <p>قصة أخرى يمكنك إضافتها بسهولة...</p>
+            <h2>القصة الثانية</h2>
+            <p>يمكنك إضافة المزيد من القصص بسهولة...</p>
+        </div>
+        
+        <div class="add-story">
+            <h3>أضف قصتك</h3>
+            <input type="text" id="story-title" placeholder="عنوان القصة">
+            <textarea id="story-content" placeholder="اكتب قصتك هنا..."></textarea>
+            <button onclick="addStory()">إضافة القصة</button>
         </div>
     </div>
+    
+    <div class="footer">جميع الحقوق محفوظة &copy; el Mehdi Fareh</div>
+    
+    <script>
+        function addStory() {
+            let title = document.getElementById('story-title').value;
+            let content = document.getElementById('story-content').value;
+            if (title && content) {
+                let storyContainer = document.createElement('div');
+                storyContainer.classList.add('story');
+                storyContainer.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
+                document.querySelector('.container').appendChild(storyContainer);
+                document.getElementById('story-title').value = '';
+                document.getElementById('story-content').value = '';
+            } else {
+                alert('يرجى إدخال عنوان القصة ومحتواها!');
+            }
+        }
+    </script>
 </body>
 </html>
